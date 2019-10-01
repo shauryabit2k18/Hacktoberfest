@@ -32,6 +32,13 @@ class GetPostFromUrl():
         return self.results
 
 
+    def store_results(self,output):
+        filename = "GetPostFromUrl" + ("_".join(str(datetime.now()).split(" "))).replace(":","-") + ".json"
+        with open(filename,"w") as f:
+            json.dump(output,f,indent=2)
+        f.close()
+
+
     def transform(self,rss_url,result_data):
         no_of_posts = 0
         data = []
@@ -103,14 +110,6 @@ class GetPostFromUrl():
         #print(len(self.results))
         if data:
             self.completed_urls[rss_url] = data
-
-    def store_results(self,output):
-        filename = "GetPostFromUrl" + ("_".join(str(datetime.now()).split(" "))).replace(":","-") + ".json"
-        with open(filename,"w") as f:
-            json.dump(output,f,indent=2)
-        f.close()
-
-
 
 
 if __name__ == '__main__':
